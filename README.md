@@ -1,8 +1,6 @@
-
-作者：Lamourrr winnerknight
-
-
+﻿作者：Lamourrr winnerknight
 ---
+
 #  前言
 **oneMKL**是英特尔推出的一款数学核心库，旨在提供高性能的数学函数和操作，以加速数据科学、科学计算、机器学习等领域的应用程序。它是英特尔oneAPI跨架构开发工具套件的一部分，支持在不同硬件加速器（如CPU、GPU、FPGA等）上实现高性能的数学计算。
 本次“**东方杯英特尔oneAPI黑客松大赛**”赛题为使用oneMKL工具，对FFT算法进行加速与优化，下面是对于本次赛题以及oneMKL的使用经验分享。
@@ -23,36 +21,68 @@
 ## 2.下载安装intel oneMKL
 
 进入[intel oneMKL官网](https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl.html#gs.4gen78)下载安装oneMKL
-![Alt](https://img-blog.csdnimg.cn/7535c6550817480b84f6313e1808b031.png#pic_center =200x200)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/e8d396dc21dd44a1854f3cc4b0cbbbb1.png#pic_center)
+
 选择操作系统和发行版本（我们使用的是Windows系统）
-![Alt](https://img-blog.csdnimg.cn/d761cac4187342f398cffbf209a748b1.png#pic_center)
-不想注册可选以下选项直接下载![Alt](https://img-blog.csdnimg.cn/96381260557b49c2a4ea25bd4ec216db.png#pic_center)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/f17e64e3308b42bfb9cea657b0e57060.png#pic_center)
+
+不想注册可选以下选项直接下载
+![在这里插入图片描述](https://img-blog.csdnimg.cn/055ed4f017d748e48bdd714b1bc5b516.png#pic_center)
+
 下载完打开安装包，点击Extrat安装product package
-![Alt](https://img-blog.csdnimg.cn/6d8dd97faa29402a944f2b330d3996df.png#pic_center)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/e3f72fe01ed6465bb762db4992ba5482.png#pic_center)
+
 选Continue进行oneMKL安装
-![Alt](https://img-blog.csdnimg.cn/708503b1697242c39ad0829451068c6d.png#pic_center)
-点击Customize以定义安装位置![Alt](https://img-blog.csdnimg.cn/2748eea1c6174abb8da2321c0ff3e967.png#pic_center)左下角选择安装位置（**一定要记住你的安装位置，复制下来后面配置要用**）![Alt](https://img-blog.csdnimg.cn/8f6a862c49b2461bae5c6bbffec0a35e.png#pic_center)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/fcfb49c635de45b59994dce229c431cc.png#pic_center)
+
+点击Customize以定义安装位置
+![在这里插入图片描述](https://img-blog.csdnimg.cn/a068a3e438a1408e9c54decb1946f78e.png#pic_center)
+
+左下角选择安装位置（**一定要记住你的安装位置，复制下来后面配置要用**）
+![在这里插入图片描述](https://img-blog.csdnimg.cn/afb14aa2188842ae928e0d3be5b7f49d.png#pic_center)
+
 选择MKL库和VS版本安装
-![Alt](https://img-blog.csdnimg.cn/6b879e2408e64c20b742d95975cab3ff.png#pic_center)
-![Alt](https://img-blog.csdnimg.cn/0656506f7bbe4f4ead1ed8a5bf1f10b6.png#pic_center)
-![Alt](https://img-blog.csdnimg.cn/f47eeb8356724668b638a8155fe7be15.png#pic_center)
-点击Finish安装完成![Alt](https://img-blog.csdnimg.cn/6b5c925e15914781a8908b987138a7a3.png#pic_center)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/79d042efd64f4252967dfbc33ea9593d.png#pic_center)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/aacaf96d5df44bdc97aac449ed21c941.png#pic_center)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/7d8f23b780fd4cfb861b42effaa9ef30.png#pic_center)
+
+
+
+点击Finish安装完成
+![在这里插入图片描述](https://img-blog.csdnimg.cn/3c43731e63d741e7a807eace1b47c16e.png#pic_center)
+
 ## 3. 配置VS2022的环境
-打开 Visual Studio2022，打开属性管理器。（属性管理器在视图-其他窗口）。打开后右上角出现下图![Alt](https://img-blog.csdnimg.cn/ee19876e32c546a7a4ef4fea18aa3233.png#pic_center =220x140)
-鼠标右键Debug | x64添加新项目属性表![Alt](https://img-blog.csdnimg.cn/99f3f9cf85a745d78729d954443f5989.png#pic_center)
-双击新建的MKL属性表，打开属性![Alt](https://img-blog.csdnimg.cn/c0fa9e461b994cd8ba04df1d49c36644.png#pic_center)
-在 Intel Libraries for oneAPI 中把 Use oneMKL 设置成 Parallel![Alt](https://img-blog.csdnimg.cn/dd62c32777494c96a72750db3a0744e6.png#pic_center)
+打开 Visual Studio2022，打开属性管理器。（属性管理器在视图-其他窗口）。打开后右上角出现下图
+![在这里插入图片描述](https://img-blog.csdnimg.cn/7fc7fe10044040a0877388c0a85387f9.png#pic_center)
+
+鼠标右键Debug | x64添加新项目属性表
+![在这里插入图片描述](https://img-blog.csdnimg.cn/c88a52b899d04d78960f7649a547a7e5.png#pic_center)
+
+双击新建的MKL属性表，打开属性
+![在这里插入图片描述](https://img-blog.csdnimg.cn/fa3bbf3954894a6b811ab6ef9f82a69a.png#pic_center)
+
+在 Intel Libraries for oneAPI 中把 Use oneMKL 设置成 Parallel
+![在这里插入图片描述](https://img-blog.csdnimg.cn/f3cde71a91324aab9b6e079a48ec6fa7.png#pic_center)
+
 在 VC++目录中进行三项设置（**具体根据你自己安装oneMKL的位置来设置，上面复制有可直接粘贴**）
 
  1. 可执行文件目录：(安装位置)\mkl\2023.1.0\bin\intel64 
  2. 包含目录：(安装位置)\mkl\2023.1.0\include
  3. 库目录(两个)：(安装位置)\mkl\2023.1.0\lib\intel64
-(安装位置)\compiler\2023.1.0\windows\compiler\lib\intel64_win![Alt](https://img-blog.csdnimg.cn/f6f1f6b1e62d4c0a9dabc7b7a4486184.png#pic_center)
+(安装位置)\compiler\2023.1.0\windows\compiler\lib\intel64_win
+![在这里插入图片描述](https://img-blog.csdnimg.cn/967556e1db36452799871c52724f046b.png#pic_center)
+
 
 在**链接器-输入中添加附加依赖项**，根据电脑不同配置，选择不同依赖项。（我们用的是64位，Link： mkl_intel_ilp64.lib mkl_intel_thread.lib mkl_core.lib libiomp5md.lib）
-选择地址：[https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl-link-line-advisor.html#gs.4geua1](https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl-link-line-advisor.html#gs.4geua1)![Alt](https://img-blog.csdnimg.cn/d83de7dbfbdf4ce29ee6ab836cb3f8f1.png#pic_center)
-在Windows系统搜索框中搜索 “编辑系统环境变量”，打开，弹出系统属性![Alt](https://img-blog.csdnimg.cn/952d6003971a4248be785390061b155d.png#pic_center)
-点击环境变量，在系统变量中，选择 Path 变量，双击进入编辑环境变量，点击新建，将路径：(安装oneMKL位置)\mkl\2023.1.0\redist\intel64 添加入系统变量![Alt](https://img-blog.csdnimg.cn/6e0b5081b2b24110a3aea6659a76f6b4.png)
+选择地址：[https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl-link-line-advisor.html#gs.4geua1](https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl-link-line-advisor.html#gs.4geua1)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/aa968cf2167447b49300494417a97b2c.png#pic_center)
+
+在Windows系统搜索框中搜索 “编辑系统环境变量”，打开，弹出系统属性
+![在这里插入图片描述](https://img-blog.csdnimg.cn/1885098f5c1c4c00a81ca3b62d617370.png#pic_center)
+
+点击环境变量，在系统变量中，选择 Path 变量，双击进入编辑环境变量，点击新建，将路径：(安装oneMKL位置)\mkl\2023.1.0\redist\intel64 添加入系统变量
+![在这里插入图片描述](https://img-blog.csdnimg.cn/04e603dc22224136befc93150c1a2e06.png#pic_center)
+
 **到此，环境配置完成。**
 参考文章：[https://blog.csdn.net/m0_63111108/article/details/124734432](https://blog.csdn.net/m0_63111108/article/details/124734432)
 
@@ -150,7 +180,8 @@ free(datain);
 # 四、运行结果
 **该运行结果为循环100次计算得到的平均运行时间**
 可见对比误差在1e-5之内，oneMKL FFT算法运算结果是正确的，并且运行速度约为fftw3算法的3倍
-![在这里插入图片描述kkkk](https://img-blog.csdnimg.cn/56852ecbd026473f984c4e8c623954ee.png)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/9c9ce9ffc69c45d8b0c100477f6ab05c.png#pic_center)
+
 # 总结
 **使用oneMKL FFT计算傅里叶变换的优点:**
  1. 高性能优化： oneMKL 中的 FFT 函数经过了高度优化，可以充分利用底层硬件资源，例如多核 CPU、GPU 等，以实现最佳性能。
