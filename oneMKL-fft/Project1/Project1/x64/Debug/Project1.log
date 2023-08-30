@@ -1,0 +1,7 @@
+﻿  FFT-opt.cpp
+D:\Program Files (x86)\Intel\oneAPI\mkl\2023.2.0\include\mkl_spblas.h(1149,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+D:\文档\桌面\c语言文件\oneMKL-fft\Project1\Project1\FFT-opt.cpp(27,1): warning C4326: “main”的返回类型应为“int”而非“void”
+D:\文档\桌面\c语言文件\oneMKL-fft\Project1\Project1\FFT-opt.cpp(28,14): warning C4305: “初始化”: 从“double”到“float”截断
+D:\文档\桌面\c语言文件\oneMKL-fft\Project1\Project1\FFT-opt.cpp(79,14): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\文档\桌面\c语言文件\oneMKL-fft\Project1\Project1\FFT-opt.cpp(80,14): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+  Project1.vcxproj -> D:\文档\桌面\c语言文件\oneMKL-fft\Project1\x64\Debug\Project1.exe
